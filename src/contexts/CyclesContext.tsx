@@ -52,14 +52,18 @@ export function CyclesContextProvider({
 
       if (storedStateAsJSON) {
         return JSON.parse(storedStateAsJSON);
+      } else {
+        return {
+          cycles: [],
+          activeCycleId: null,
+        };
       }
     },
   );
 
   const { cycles, activeCycleId } = cyclesState;
-  const activeCycle = cycles
-    ? cycles.find((cycle) => cycle.id === activeCycleId)
-    : undefined;
+
+  const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId);
 
   const [amountSecondsPassed, setAmountSecondsPassed] = useState(() => {
     if (activeCycle) {
